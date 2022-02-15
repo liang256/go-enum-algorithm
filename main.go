@@ -3,33 +3,38 @@ package main
 import "fmt"
 
 func main() {
+	// distance of each contries
 	dis := [][]int{
-		{0, 5, 3, 2},
-		{5, 0, 2, 1},
-		{3, 2, 0, 7},
-		{2, 1, 7, 0},
+		{0, 14, 15, 17, 16},
+		{14, 0, 24, 8, 36},
+		{15, 24, 0, 34, 4},
+		{17, 8, 34, 0, 30},
+		{16, 36, 4, 30, 0},
 	}
 	fmt.Println(dis)
 
+	// choose a start point
 	start_id := 0
+	// init route slice
 	route := []int{}
 	// set start point is con(0)
 	route = append(route, start_id)
 
-	// all available contries
-	cons := []int{0, 1, 2, 3}
-	// remove start-contry-id in contries
+	// all available contrie-ids
+	cons := []int{0, 1, 2, 3, 4}
+	// remove start-contry-id in contries since it
+	// is already uesed as the start point
 	for i := 0; i < len(cons); i++ {
 		if cons[i] == start_id {
 			cons[i] = -1
 		}
 	}
-	// fmt.Println(cons)
+	// run the algorithm
 	enum(route, cons, dis)
 }
 
 func enum(route []int, cons []int, dis [][]int) {
-	if len(route) >= 4 {
+	if len(route) >= 5 {
 		fmt.Println(route, sum_total(route, dis))
 	}
 
